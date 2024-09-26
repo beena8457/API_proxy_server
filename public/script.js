@@ -1,20 +1,4 @@
-// document.getElementById('userForm').addEventListener('submit', async function(e) {
-//     e.preventDefault();
-//     const username = document.getElementById('username').value;
 
-//     try {
-//         const response = await fetch(`/api/users/${username}`);
-//         if (response.status === 200) {
-//             const data = await response.json();
-//             document.getElementById('userInfo').innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
-//         } else {
-//             const errorData = await response.json();
-//             document.getElementById('userInfo').innerHTML = `<pre>${JSON.stringify(errorData, null, 2)}</pre>`;
-//         }
-//     } catch (error) {
-//         document.getElementById('userInfo').innerHTML = '<pre>Error fetching user info.</pre>';
-//     }
-// });
 async function fetchUserData() {
     const username = document.getElementById('username').value;
     if (!username) {

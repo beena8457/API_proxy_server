@@ -11,7 +11,6 @@ const PORT = process.env.PORT || 3000;
 const GITHUB_API_BASE_URL = process.env.GITHUB_API_BASE_URL;
 const GITHUB_API_KEY = process.env.GITHUB_API_KEY;
 
-// Enable CORS
 app.use(cors());
 
 // Rate limiting: 5 requests per minute per IP
@@ -33,7 +32,7 @@ app.get('/api/users/:username', cache('5 minutes'), async (req, res) => {
         const response = await needle('get', `${GITHUB_API_BASE_URL}/users/${username}`, {
             headers: {
                 'User-Agent': 'api-proxy-server',
-                'Authorization': `token ${GITHUB_API_KEY}` // Add the API key to the header
+                'Authorization': `token ${GITHUB_API_KEY}` 
             }
         });
 
@@ -51,7 +50,6 @@ app.get('/api/users/:username', cache('5 minutes'), async (req, res) => {
 // Serve static files
 app.use(express.static('public'));
 
-// Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
