@@ -13,7 +13,6 @@ const GITHUB_API_KEY = process.env.GITHUB_API_KEY;
 
 app.use(cors());
 
-// Rate limiting: 5 requests per minute per IP
 const limiter = rateLimit({
     windowMs: 60 * 1000, // 1 minute
     max: 5, // Limit each IP to 5 requests per windowMs
@@ -21,10 +20,8 @@ const limiter = rateLimit({
     statusCode: 429
 });
 
-// Apply the rate limiting middleware to all requests
 app.use(limiter);
 
-// Proxy endpoint to fetch GitHub user details with caching
 app.get('/api/users/:username', cache('5 minutes'), async (req, res) => {
     const { username } = req.params;
 
@@ -47,7 +44,7 @@ app.get('/api/users/:username', cache('5 minutes'), async (req, res) => {
     }
 });
 
-// Serve static files
+
 app.use(express.static('public'));
 
 app.listen(PORT, () => {
