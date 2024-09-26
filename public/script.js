@@ -1,6 +1,8 @@
 
 async function fetchUserData() {
     const username = document.getElementById('username').value;
+    const resultDiv = document.getElementById('result');
+
     if (!username) {
         alert('Please enter a GitHub username');
         return;
@@ -13,11 +15,12 @@ async function fetchUserData() {
         }
         const data = await response.json();
         displayUserData(data);
+        resultDiv.classList.add('show'); // Show result with animation
     } catch (error) {
-        document.getElementById('result').innerHTML = `<p>Error: ${error.message}</p>`;
+        resultDiv.innerHTML = `<p>Error: ${error.message}</p>`;
+        resultDiv.classList.add('show'); // Show error message with animation
     }
 }
-
 
 function displayUserData(data) {
     const html = `
@@ -27,3 +30,4 @@ function displayUserData(data) {
     `;
     document.getElementById('result').innerHTML = html;
 }
+
